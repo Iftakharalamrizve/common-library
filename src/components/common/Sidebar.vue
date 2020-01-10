@@ -102,6 +102,11 @@
                                     <li><a href="pricing_tables.html">Pricing Tables</a></li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-windows"></i> Practice <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><router-link to="/todo-list">ToDo List</router-link></li>
+                                </ul>
+                            </li>
                             <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="#level1_1">Level One</a>

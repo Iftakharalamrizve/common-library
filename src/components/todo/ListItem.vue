@@ -57,7 +57,7 @@
         },
         methods:{
             removeItem(index){
-                this.$emit("removeItem",index);
+                enventBus.$emit("removeItem",index);
             },
             editItem(){
                 this.beforeEdit = this.title;
@@ -68,7 +68,7 @@
                     this.title = this.beforeEdit
                 }
                 this.editing=false;
-                this.$emit("finishEdit",{id:this.id,title:this.title,'completed': this.completed,'editing': this.editing,'beforeEdit':''})
+                enventBus.$emit("finishEdit",{id:this.id,title:this.title,'completed': this.completed,'editing': this.editing,'beforeEdit':''})
             },
             cancelEdit(){
                 if(this.title.trim()==""){

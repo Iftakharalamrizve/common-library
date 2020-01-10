@@ -16,7 +16,7 @@
                         </div>
                         <div class="panel-body">
                             <ul class="list-group">
-                                <list-item v-for="(list,index) in filterLists" :key="list.id" :item="list" :index="index" :checkAll="!anyRemaining" @removeItem="removeItem" @finishEdit="finishEdit"></list-item>
+                                <list-item v-for="(list,index) in filterLists" :key="list.id" :item="list" :index="index" :checkAll="!anyRemaining" ></list-item>
                             </ul>
                         </div>
                         <div class="panel-footer mt-3 me-5">
@@ -70,6 +70,10 @@
                     el.focus()
                 }
             }
+        },
+        created() {
+            enventBus.$on("removeItem",(index)=>this.removeItem(index));
+            enventBus.$on("finishEdit",(data)=>this.finishEdit(data));
         },
         computed:{
             remaining(){

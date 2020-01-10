@@ -16,6 +16,13 @@ Vue.APIURL = Vue.prototype.APIURL = process.env.VUE_APP_APIURL;
 Vue.IMAGEURL = Vue.prototype.IMAGEURL = process.env.VUE_APP_IMAGEURL;
 Vue.baseUrl = Vue.prototype.baseUrl = process.env.VUE_APP_BASEURL;
 
+
+//---------------------------------------------------------------
+//  configuration event bus
+//--------------------------------------------------------------
+window.enventBus = new Vue();
+
+
 //---------------------------------------------------------------
 // Axios configuration
 //--------------------------------------------------------------

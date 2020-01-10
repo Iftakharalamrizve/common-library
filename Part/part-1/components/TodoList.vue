@@ -16,7 +16,18 @@
                         </div>
                         <div class="panel-body">
                             <ul class="list-group">
-                                <list-item v-for="(list,index) in filterLists" :key="list.id" :item="list" :index="index" :checkAll="!anyRemaining" @removeItem="removeItem" @finishEdit="finishEdit"></list-item>
+                                <li class="list-group-item" v-for="(list,index) in filterLists" :key="list.id">
+                                    <div class="checkbox">
+                                        <input v-model="list.completed" type="checkbox" class="completed"   />
+                                        <label v-if="!list.editing" for="checkbox" @dblclick="editItem(list)">
+                                            {{list.title}}
+                                        </label>
+                                        <input v-else type="text" class="form-control" v-model="list.title" @blur="doneEdit(list)" @keyup.enter="doneEdit(list)" @keyup.esc="cancelEdit(list)" v-focus>
+                                    </div>
+                                    <div class="pull-right action-buttons" @click="removeItem(index)">
+                                        <a  class="trash" ><span class="glyphicon glyphicon-trash"></span></a>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div class="panel-footer mt-3 me-5">
@@ -47,10 +58,8 @@
 </template>
 
 <script>
-    import ListItem from "./todo/ListItem";
     export default {
         name: "TodoList",
-        components: {ListItem},
         data(){
             return{
                 name:"Todo List",
@@ -104,9 +113,23 @@
                 this.ListId++;
             },
 
-            finishEdit(data){
-                const index = this.Lists.findIndex((item) => item.id == data.id)
-                this.Lists.splice(index, 1, data)
+            editItem(list){
+                this.beforeEdit = list.title;
+                list.editing = true;
+            },
+
+            doneEdit(list){
+                if(list.title.trim() == ""){
+                    list.title = this.beforeEdit
+                }
+                list.editing=false;
+            },
+            cancelEdit(list){
+                if(list.title.trim()==""){
+                    return;
+                }
+                list.title=this.beforeEdit;
+                list.editing = false;
             },
             checkedAll(){
                 this.Lists.forEach((todo) => todo.completed = event.target.checked)

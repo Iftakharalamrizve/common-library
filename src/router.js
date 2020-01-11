@@ -15,6 +15,7 @@ Vue.use(Router);
 export default new Router({
     routes: [
         {path:'/',component:Dashboard},
+        {path:'/home',component:Dashboard},
         {path:'/todo-list',component:TodoList}
     ],
     mode: `history`,
